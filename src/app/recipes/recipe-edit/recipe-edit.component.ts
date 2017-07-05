@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {FormArray,
         FormBuilder,
@@ -25,7 +25,8 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   constructor(private route: ActivatedRoute,
               private recipeSvc: RecipeService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit() {
     this.subscription = this.route.params.subscribe(
@@ -73,5 +74,37 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       description: [recipeContent, Validators.required],
       ingredients: recipeIngredients
     });
+  }
+
+  onSubmit() {
+    const newRecipe = this.recipeForm.value;
+    if (this.isNew) {
+      this.recipeSvc.addRecipe(newRecipe);
+    } else {
+      this.recipeSvc.editRecipe(this.recipe, newRecipe);
+    }
+    this.navigateBack();
+  }
+
+  onCancel() {
+    this.navigateBack();
+  }
+
+  private navigateBack() {
+    this.router.navigate(['../']);
+  }
+
+  onRemoveItem(index: number) {
+    (<FormArray>this.recipeForm.controls['ingredients']).removeAt(index);
+  }
+
+  onAddItem(name: string, amount: string) {
+    (<FormArray>this.recipeForm.controls['ingredients']).push(
+      new FormGroup({
+        name: new FormControl(name, Validators.required),
+        amount: new FormControl(amount, [Validators.required,
+          Validators.pattern('\\d+')])
+      })
+    );
   }
 }

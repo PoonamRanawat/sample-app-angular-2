@@ -9,9 +9,14 @@ import {ShoppingListService} from './shopping-list.service';
 })
 export class ShoppingListComponent implements OnInit {
   items: Ingredient[] = [];
+  selectedItem: Ingredient = null;
   constructor(private shoppingListSvc: ShoppingListService) { }
 
   ngOnInit() {
     this.items = this.shoppingListSvc.getItems();
+  }
+
+  onSelectItem(item: Ingredient) {
+    this.selectedItem = item;
   }
 }
