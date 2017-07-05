@@ -10,7 +10,7 @@ export class RecipeService {
       new Ingredient('Cream', 2),
       new Ingredient('Butter', 1)
     ]),
-    new Recipe('Icecream Shake', 'Excellent', 'http://www.thecookierookie.com/wp-content/uploads/2015/02/Irish-Cream-Shake-7.jpg',[
+    new Recipe('Icecream Shake', 'Excellent', 'http://www.thecookierookie.com/wp-content/uploads/2015/02/Irish-Cream-Shake-7.jpg', [
       new Ingredient('Milk', 3),
       new Ingredient('Cream', 1)
     ])
@@ -22,6 +22,7 @@ export class RecipeService {
   }
 
   getRecipe(id: number) {
+    console.log(id);
     return this.recipes[id];
   }
 

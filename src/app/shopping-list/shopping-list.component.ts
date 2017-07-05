@@ -14,5 +14,4 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit() {
     this.items = this.shoppingListSvc.getItems();
   }
-
 }
