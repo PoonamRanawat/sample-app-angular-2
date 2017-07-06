@@ -12,13 +12,16 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" appDropdown>
-          <a href="#" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Other</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
+          <a
+            class="dropdown-toggle"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Recipe Management <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a (click)="onStore()" style="cursor: pointer;">Store Recipes</a></li>
+              <li><a (click)="onFetch()" style="cursor: pointer;">Retrieve Recipes</a></li>
+            </ul>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
